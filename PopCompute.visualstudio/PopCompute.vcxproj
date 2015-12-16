@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Cuda|x64">
+      <Configuration>Cuda</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Watermarked|x64">
+      <Configuration>Watermarked</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\PopUnity.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\PopUnity.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\src\PopCompute.cs" />
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{64811728-CD20-4F2C-899B-E3BF3D4B032E}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>PopMoveiTexture</RootNamespace>
+    <TargetPlatformVersion>8.1</TargetPlatformVersion>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Watermarked|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Cuda|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\SoyLib\Soy_Windows.props" />
+    <Import Project="..\..\SoyLib\SoyApp_Windows.props" />
+    <Import Project="NoWatermark.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Watermarked|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\SoyLib\Soy_Windows.props" />
+    <Import Project="..\..\SoyLib\SoyApp_Windows.props" />
+    <Import Project="Watermarked.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Cuda|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\SoyLib\Soy_Windows.props" />
+    <Import Project="..\..\SoyLib\SoyApp_Windows.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Watermarked|x64'" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Cuda|x64'" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+    </ClCompile>
+    <Link />
+    <Link />
+    <PostBuildEvent>
+      <Command>@echo off
+REM copy DLL to unity asset path
+set PluginDir=$(projectdir)\..\Unity\Assets\Plugins\Windows\
+set PluginDllPath=%PluginDir%\$(projectname).dll
+set PluginPdbPath=%PluginDir%\$(projectname).pdb
+set DllFile=$(TargetPath)
+set PdbFile=$(Outdir)\$(TargetName).pdb
+mkdir %PluginDir%
+REM rename too
+echo Copying %DllFile% to %PluginDllPath%
+copy /Y %DllFile% %PluginDllPath%
+echo Copying %PdbFile% to %PluginPdbPath%
+copy /Y %PdbFile% %PluginPdbPath%
+
+
+REM copy .cs like other platforms do
+set PluginCodeDir="$(projectdir)\..\Unity\Assets\Plugins\"
+set PluginCodePath="$(projectdir)\..\src\$(projectname).cs"
+echo Copying plugin .cs to %PluginCodeDir%
+copy /Y %PluginCodePath% %PluginCodeDir%
+
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Watermarked|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+    </ClCompile>
+    <Link />
+    <Link />
+    <PostBuildEvent>
+      <Command>@echo off
+REM copy DLL to unity asset path
+set PluginDir=$(projectdir)\..\Unity\Assets\Plugins\Windows\
+set PluginDllPath=%PluginDir%\$(projectname).dll
+set PluginPdbPath=%PluginDir%\$(projectname).pdb
+set DllFile=$(TargetPath)
+set PdbFile=$(Outdir)\$(TargetName).pdb
+mkdir %PluginDir%
+REM rename too
+echo Copying %DllFile% to %PluginDllPath%
+copy /Y %DllFile% %PluginDllPath%
+echo Copying %PdbFile% to %PluginPdbPath%
+copy /Y %PdbFile% %PluginPdbPath%
+
+
+REM copy .cs like other platforms do
+set PluginCodeDir="$(projectdir)\..\Unity\Assets\Plugins\"
+set PluginCodePath="$(projectdir)\..\src\PopMovieTexture.cs"
+echo Copying plugin .cs to %PluginCodeDir%
+copy /Y %PluginCodePath% %PluginCodeDir%
+
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Cuda|x64'">
+    <ClCompile>
+      <PrecompiledHeader>
+      </PrecompiledHeader>
+      <PreprocessorDefinitions>ENABLE_CUDA;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <Link />
+    <Link>
+      <OutputFile>$(TargetPath)</OutputFile>
+      <AdditionalDependencies>cudart.lib;nvcuvid.lib;cuda.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <PostBuildEvent>
+      <Command>@echo off
+REM copy DLL to unity asset path
+set PluginDir=$(projectdir)\..\Unity\Assets\Plugins\Windows\
+set PluginDllPath=%PluginDir%\$(projectname).dll
+set PluginPdbPath=%PluginDir%\$(projectname).pdb
+set DllFile=$(TargetPath)
+set PdbFile=$(Outdir)\$(TargetName).pdb
+mkdir %PluginDir%
+REM rename too
+echo Copying %DllFile% to %PluginDllPath%
+copy /Y %DllFile% %PluginDllPath%
+echo Copying %PdbFile% to %PluginPdbPath%
+copy /Y %PdbFile% %PluginPdbPath%
+
+
+REM copy .cs like other platforms do
+set PluginCodeDir="$(projectdir)\..\Unity\Assets\Plugins\"
+set PluginCodePath="$(projectdir)\..\src\PopMovieTexture.cs"
+echo Copying plugin .cs to %PluginCodeDir%
+copy /Y %PluginCodePath% %PluginCodeDir%
+
+</Command>
+    </PostBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
