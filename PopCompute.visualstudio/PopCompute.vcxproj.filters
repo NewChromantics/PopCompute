@@ -10,15 +10,9 @@
     <ClCompile Include="..\src\PopUnity.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="..\src\TDecoderPlaylist.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\src\PopUnity.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\src\TDecoderPlaylist.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

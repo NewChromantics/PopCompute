@@ -15,8 +15,8 @@ Global
 		Master|x64 = Master|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{64811728-CD20-4F2C-899B-E3BF3D4B032E}.Master|x64.ActiveCfg = Debug|x64
-		{64811728-CD20-4F2C-899B-E3BF3D4B032E}.Master|x64.Build.0 = Debug|x64
+		{64811728-CD20-4F2C-899B-E3BF3D4B032E}.Master|x64.ActiveCfg = Master|x64
+		{64811728-CD20-4F2C-899B-E3BF3D4B032E}.Master|x64.Build.0 = Master|x64
 		{D18B3ABF-23BD-42D8-BAB1-DA4921F1033D}.Master|x64.ActiveCfg = Debug|x64
 		{D18B3ABF-23BD-42D8-BAB1-DA4921F1033D}.Master|x64.Build.0 = Debug|x64
 	EndGlobalSection
